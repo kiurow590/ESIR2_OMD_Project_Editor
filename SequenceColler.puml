@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+user -> système: placementCurseur
+système -> user: placement
+user -> système: ctrl+v
+système -> système: recupDansPressePapier
+système -> user: affichage
+
+
+@enduml
