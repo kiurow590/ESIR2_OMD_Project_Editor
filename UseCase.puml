@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+actor "User" as user
+rectangle Editor {
+  usecase "Ecrire" as UC1
+  usecase "selectionner" as UC2
+  usecase "deplacer" as UC3
+  usecase "copier" as UC4
+  usecase "Coller" as UC5
+  usecase "Couper" as UC6
+
+
+}
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+
+@enduml
