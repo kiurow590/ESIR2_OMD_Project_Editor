@@ -9,5 +9,6 @@ public class CopyCommand implements Command{
     public void execute() {
         //editor.copy();
         System.out.println("Copy");
+        editor.setCopyBuffer(editor.getTextArea().getSelectedText());
     }
 }
