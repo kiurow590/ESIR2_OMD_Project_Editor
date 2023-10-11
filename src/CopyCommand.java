@@ -1,8 +1,17 @@
-public class CopyCommand implements Command{
+public final class CopyCommand implements Command {
     private Editor editor;
 
-    public CopyCommand(Editor editor){
+    private static CopyCommand instance = null;
+
+    private CopyCommand(Editor editor) {
         this.editor = editor;
+    }
+
+    public static CopyCommand getInstance(Editor editor) {
+        if (instance == null) {
+            instance = new CopyCommand(editor);
+        }
+        return instance;
     }
 
     @Override

@@ -1,11 +1,20 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class PasteCommand implements Command {
+public final class PasteCommand implements Command {
     private Editor editor;
 
-    public PasteCommand(Editor editor) {
+    private static PasteCommand instance = null;
+
+    private PasteCommand(Editor editor) {
         this.editor = editor;
+    }
+
+    public static PasteCommand getInstance(Editor editor) {
+        if (instance == null) {
+            instance = new PasteCommand(editor);
+        }
+        return instance;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Editor {
     String copyBuffer = "";
 
     public Editor() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         JFrame window = new JFrame("Editeur de texte");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel_1 = new JPanel();

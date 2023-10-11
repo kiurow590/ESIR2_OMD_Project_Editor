@@ -1,12 +1,22 @@
 import javax.swing.*;
 
 
-public class CutCommand implements Command{
+public final class CutCommand implements Command{
 
     private Editor editor;
 
-    public CutCommand(Editor editor){
+    private static CutCommand instance = null;
+
+    private CutCommand(Editor editor){
         this.editor = editor;
+    }
+
+
+    public static CutCommand getInstance(Editor editor){
+        if(instance == null){
+            instance = new CutCommand(editor);
+        }
+        return instance;
     }
 
     @Override
