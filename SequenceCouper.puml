@@ -3,9 +3,9 @@
 user -> système: selectionnerTexte
 système -> système: detecterZoneSelect
 système -> user: surlignageTexte
-user -> système: ctrl+x
-système -> système: copierDansPressePapier
-système -> système: supprimerBuffer
+user -> système: ClickCutButton
+système -> système: editor.setCopyBuffer(temp.getSelectedText());
+système -> système: textArea.deleteSelection();
 système -> user: supprimerTexte
 
 @enduml
