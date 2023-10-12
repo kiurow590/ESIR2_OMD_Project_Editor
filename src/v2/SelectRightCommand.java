@@ -1,3 +1,5 @@
+package v2;
+
 import javax.swing.*;
 
 public final class SelectRightCommand implements Command {

@@ -1,5 +1,6 @@
+package v2;
+
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 public final class PasteCommand implements Command {
     private Editor editor;

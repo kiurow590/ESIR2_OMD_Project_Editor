@@ -1,6 +1,6 @@
+package v2;
+
 import javax.swing.*;
-import javax.swing.text.DefaultHighlighter;
-import javax.swing.text.Highlighter;
 
 public final class SelectLeftCommand implements Command {
     private Editor editor;

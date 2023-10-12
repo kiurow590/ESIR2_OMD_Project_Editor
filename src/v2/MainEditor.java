@@ -1,3 +1,5 @@
+package v2;
+
 import javax.swing.*;
 
 public class MainEditor {

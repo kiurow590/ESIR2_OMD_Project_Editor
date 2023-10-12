@@ -1,3 +1,5 @@
+package v1;
+
 public final class CopyCommand implements Command {
     private Editor editor;
 

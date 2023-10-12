@@ -1,7 +1,9 @@
+package v2;
+
 import javax.swing.*;
 
 
-public final class CutCommand implements Command{
+public final class CutCommand implements Command {
 
     private Editor editor;
 

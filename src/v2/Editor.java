@@ -1,6 +1,9 @@
-import java.awt.*;
+package v2;
+
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author Aubry TONNERRE && Thibault GUERINEL
