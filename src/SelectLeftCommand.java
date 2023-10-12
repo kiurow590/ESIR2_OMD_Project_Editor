@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 
 public class SelectLeftCommand implements Command {
     private Editor editor;
@@ -16,5 +18,6 @@ public class SelectLeftCommand implements Command {
         //temp.selectAll();
         temp.setSelectionStart(temp.getSelectionStart()-1);
         //temp.setSelectionEnd(temp.getSelectionEnd()+1);
+
     }
 }
