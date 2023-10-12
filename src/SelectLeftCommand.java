@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class SelectLeftCommand implements Command {
     private Editor editor;
 
@@ -7,17 +9,12 @@ public class SelectLeftCommand implements Command {
 
     @Override
     public void execute() {
-       // editor.setSelectionStart(5);
-        /*
-        //pasteCommand
-        //editor.paste();
-        System.out.println("Paste");
+        System.out.println("SelectLeft");
+
         JTextArea temp = editor.getTextArea();
-        int position = temp.getCaretPosition();
-        temp.insert(editor.getCopyBuffer(), position);
-        editor.setTextArea(temp);
-*/
 
-
+        //temp.selectAll();
+        temp.setSelectionStart(temp.getSelectionStart()-1);
+        //temp.setSelectionEnd(temp.getSelectionEnd()+1);
     }
 }

@@ -27,8 +27,10 @@ public class SelectRightCommand implements Command {
 
     JTextArea temp = editor.getTextArea();
 
-    temp.selectAll();
+    //temp.selectAll();
 
+
+    temp.setSelectionEnd(temp.getSelectionEnd()+1);
 
     //// get selection start
     //int start = temp.getSelectionStart();

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TextAreaSelectAll extends JPanel {
     public TextAreaSelectAll() {
@@ -35,13 +37,13 @@ public class TextAreaSelectAll extends JPanel {
         pane.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        final JButton button1 = new JButton("Select All");
-        button1.addActionListener(e -> {
+        final JButton button3 = new JButton("Select All 2");
+        button3.addActionListener(e -> {
             textArea.selectAll();
 
             // Transfer focus to JTextArea to show the selected
             // text.
-            button1.transferFocusBackward();
+            button3.transferFocusBackward();
         });
         final JButton button2 = new JButton("Get Selected Text");
         button2.addActionListener(e -> {
@@ -49,9 +51,21 @@ public class TextAreaSelectAll extends JPanel {
             System.out.println("Text = " + text);
         });
 
+        //---------------------------------------------------------------------
+        final JButton button1 = new JButton("Select All 1");
+        button1.addActionListener(e -> {
+            textArea.selectAll();
+
+            // Transfer focus to JTextArea to show the selected
+            // text.
+            button1.transferFocusBackward();
+        });
+        //---------------------------------------------------------------------
+
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(button1);
         buttonPanel.add(button2);
+        buttonPanel.add(button3);
 
         this.add(pane, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);

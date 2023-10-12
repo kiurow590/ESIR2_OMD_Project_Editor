@@ -37,6 +37,62 @@ public class Editor {
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         Editor editor = this;
+
+        JButton btnSelectRight = new JButton("->");
+        btnSelectRight.setBounds(50, 210, 180, 30);
+        //JTextField selection = new JTextField();
+        btnSelectRight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Perform actions specific to Button 1
+                // You can identify it based on its label: "Button 1"
+                // For example:
+                //l1.setText(textArea.getSelectedText());
+                //String test textArea.getText();
+                //textArea.selectAll();
+                /*Command selectRight = new SelectRightCommand(editor);
+                selectRight.execute();*/
+
+                //textArea.selectAll();
+
+                // Transfer focus to JTextArea to show the selected
+                // text.
+                //btnSelectRight.transferFocusBackward();
+                //int currentRows = textArea.getRows();
+                //int currentColumns = textArea.getColumns();
+                //textArea.setRows(currentRows + 1);
+                //textArea.setColumns(currentColumns + 10);
+
+                //textArea.selectAll();
+                //btnSelectRight.transferFocusBackward();
+
+                Command SelectRight = new SelectRightCommand(editor);
+                SelectRight.execute();
+                btnSelectRight.transferFocusBackward();
+                System.out.println("BOUTON SelectRight CLICK");
+            }
+        });
+
+
+        JButton btnSelectLeft = new JButton("<-");
+        btnSelectLeft.setBounds(50, 210, 180, 30);
+        //JTextField selection = new JTextField();
+        btnSelectLeft.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //textArea.selectAll();
+                //btnSelectRight.transferFocusBackward();
+
+                Command SelectLeft = new SelectLeftCommand(editor);
+                SelectLeft.execute();
+                btnSelectLeft.transferFocusBackward();
+                System.out.println("BOUTON SelectLeft CLICK");
+            }
+        });
+        panel_2.add(btnSelectLeft);
+        panel_2.add(btnSelectRight);
+
+
         JButton btnCopy = new JButton("Copy");
         btnCopy.setBounds(50, 210, 180, 30);
             btnCopy.addActionListener(new ActionListener() {
@@ -96,41 +152,7 @@ public class Editor {
         });
         panel_2.add(btnCut);
 
-        final JButton btnSelectRight = new JButton("->");
-        btnSelectRight.setBounds(50, 210, 180, 30);
-        //JTextField selection = new JTextField();
 
-
-        btnSelectRight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Perform actions specific to Button 1
-                // You can identify it based on its label: "Button 1"
-                // For example:
-                //l1.setText(textArea.getSelectedText());
-                //String test textArea.getText();
-                //textArea.selectAll();
-                /*Command selectRight = new SelectRightCommand(editor);
-                selectRight.execute();*/
-
-                //textArea.selectAll();
-
-                // Transfer focus to JTextArea to show the selected
-                // text.
-                //btnSelectRight.transferFocusBackward();
-                //int currentRows = textArea.getRows();
-                //int currentColumns = textArea.getColumns();
-                //textArea.setRows(currentRows + 1);
-                //textArea.setColumns(currentColumns + 10);
-                textArea.selectAll();
-
-                // Transfer focus to JTextArea to show the selected
-                // text.
-                btnSelectRight.transferFocusBackward();
-                System.out.println("BOUTON SelectRight CLICK");
-            }
-        });
-        panel_2.add(btnSelectRight);
 
         GridLayout griddy = new GridLayout(2, 0);
         window.setLayout(griddy);
@@ -162,7 +184,8 @@ public class Editor {
         textArea = text;
     }
 
-    public void actionPerformed(ActionEvent e) {
+    /*public void actionPerformed(ActionEvent e) {
         System.out.println("Event :" + e);
-    }
+    }*/
 }
+
