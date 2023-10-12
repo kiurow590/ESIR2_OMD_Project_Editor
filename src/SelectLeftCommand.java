@@ -2,22 +2,34 @@ import javax.swing.*;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
-public class SelectLeftCommand implements Command {
+public final class SelectLeftCommand implements Command {
     private Editor editor;
+    private static SelectLeftCommand instance = null;
 
-    public SelectLeftCommand(Editor editor) {
+    /**
+     * constructor
+     * @param editor
+     */
+    private SelectLeftCommand(Editor editor) {
         this.editor = editor;
+    }
+
+    /**
+     * Singleton
+     * @param editor actual editor
+     * @param editor
+     * @return
+     */
+    public static SelectLeftCommand getInstance(Editor editor) {
+        if (instance == null) {
+            instance = new SelectLeftCommand(editor);
+        }
+        return instance;
     }
 
     @Override
     public void execute() {
-        System.out.println("SelectLeft");
-
         JTextArea temp = editor.getTextArea();
-
-        //temp.selectAll();
         temp.setSelectionStart(temp.getSelectionStart()-1);
-        //temp.setSelectionEnd(temp.getSelectionEnd()+1);
-
     }
 }

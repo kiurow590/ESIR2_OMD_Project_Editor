@@ -3,10 +3,19 @@ public final class CopyCommand implements Command {
 
     private static CopyCommand instance = null;
 
+    /**
+     * Constructor
+     * @param editor
+     */
     private CopyCommand(Editor editor) {
         this.editor = editor;
     }
 
+    /**
+     * Singleton
+     * @param editor actual editeur
+     * @return get instance of command
+     */
     public static CopyCommand getInstance(Editor editor) {
         if (instance == null) {
             instance = new CopyCommand(editor);
@@ -16,8 +25,6 @@ public final class CopyCommand implements Command {
 
     @Override
     public void execute() {
-        //editor.copy();
-        System.out.println("Copy");
         editor.setCopyBuffer(editor.getTextArea().getSelectedText());
     }
 }

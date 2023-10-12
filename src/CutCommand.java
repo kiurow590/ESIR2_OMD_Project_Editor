@@ -7,11 +7,19 @@ public final class CutCommand implements Command{
 
     private static CutCommand instance = null;
 
+    /**
+     * constructor
+     * @param editor
+     */
     private CutCommand(Editor editor){
         this.editor = editor;
     }
 
-
+    /**
+     * Singleton
+     * @param editor actual editor
+     * @return return Instance
+     */
     public static CutCommand getInstance(Editor editor){
         if(instance == null){
             instance = new CutCommand(editor);
@@ -21,8 +29,6 @@ public final class CutCommand implements Command{
 
     @Override
     public void execute() {
-        //editor.cut();
-        System.out.println("Cut");
         JTextArea temp = editor.getTextArea();
         int position = temp.getCaretPosition();
         editor.setCopyBuffer(temp.getSelectedText());

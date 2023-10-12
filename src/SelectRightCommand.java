@@ -1,45 +1,32 @@
 import javax.swing.*;
 
-public class SelectRightCommand implements Command {
+public final class SelectRightCommand implements Command {
     private Editor editor;
+    private static SelectRightCommand instance = null;
 
-
-    public SelectRightCommand(Editor editor) {
+    /**
+     * constructor
+     * @param editor
+     */
+    private SelectRightCommand(Editor editor) {
         this.editor = editor;
     }
 
+
+    /**
+     * Singleton
+     * @param editor actual editor
+     * @return
+     */
+    public static SelectRightCommand getInstance(Editor editor) {
+        if (instance == null) {
+            instance = new SelectRightCommand(editor);
+        }
+        return instance;
+    }
     @Override
     public void execute() {
-        //editor.setSelectionStart(5);
-        /*
-        //pasteCommand
-        //editor.paste();
-        System.out.println("Paste");
         JTextArea temp = editor.getTextArea();
-        int position = temp.getCaretPosition();
-        temp.insert(editor.getCopyBuffer(), position);
-        editor.setTextArea(temp);
-*/
-
-   // editor.getTextArea().select(editor.getTextArea().getSelectionStart(),editor.getTextArea().getSelectionEnd() + 1);
-
-    System.out.println("SelectRight");
-
-    JTextArea temp = editor.getTextArea();
-
-    //temp.selectAll();
-
-
-    temp.setSelectionEnd(temp.getSelectionEnd()+1);
-
-    //// get selection start
-    //int start = temp.getSelectionStart();
-//
-    //// get selection end
-    //int end = temp.getSelectionEnd();
-//
-    //// create new selection
-    //temp.select(start, end + 1);
-
+        temp.setSelectionEnd(temp.getSelectionEnd()+1);
     }
 }
