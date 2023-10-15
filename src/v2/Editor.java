@@ -98,7 +98,7 @@ public class Editor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Command paste = PasteCommand.getInstance(editor);
-                historyCommand.push(paste);
+                historyCommand.push(new Pair<Command, String>(paste, textArea.getText()));
                 paste.execute();
             }
         });
@@ -118,13 +118,48 @@ public class Editor {
         btnReplay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Command last = historyCommand.replay();
-                if(!textArea.getText().isEmpty()){
-                    last.execute();
+                Pair<Command, String> last = historyCommand.replay();
+                if (!textArea.getText().isEmpty()) {
+                    last.getKey().execute();
                 }
-                
+
             }
         });
+
+
+        JButton btnUndo = new JButton("Undo");
+        btnUndo.setBounds(50, 210, 180, 30);
+        btnUndo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Pair<Command, String> undo = historyCommand.undo();
+                    assert undo != null;
+                    textArea.setText(undo.getValue());
+                } catch (Exception ex) {
+                    System.out.println("Pas de commande à annuler");
+                }
+            }
+        });
+
+
+        JButton btnRedo = new JButton("Redo");
+        btnRedo.setBounds(50, 210, 180, 30);
+        btnRedo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // objectif : refaire la derniere commande annulée
+                try {
+                    Pair<Command, String> redo = historyCommand.redo();
+                    assert redo != null;
+                    textArea.setText(redo.getValue());
+                } catch (Exception ex) {
+                    System.out.println("Pas de commande à refaire");
+                }
+
+            }
+        });
+
         // Ajour des bouton à l'interface
         panel_2.add(btnSelectLeft);
         panel_2.add(btnSelectRight);
@@ -132,7 +167,10 @@ public class Editor {
         panel_2.add(btnPaste);
         panel_2.add(btnCut);
         panel_2.add(btnReplay);
+        panel_2.add(btnUndo);
+        panel_2.add(btnRedo);
 
+        //Gestion de touche pressé pour l'ajout dans une commande
         textArea.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -143,7 +181,7 @@ public class Editor {
             public void keyPressed(KeyEvent e) {
                 //System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
                 CharacterReleaseCommand charKey = new CharacterReleaseCommand(editor, e.getKeyChar(), e.getKeyCode());
-                historyCommand.push(charKey);
+                historyCommand.push(new Pair<Command, String>(charKey, textArea.getText()));
             }
 
             @Override
