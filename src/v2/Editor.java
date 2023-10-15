@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * @author Aubry TONNERRE && Thibault GUERINEL
@@ -14,6 +16,7 @@ public class Editor {
     private JPanel panel_2 = new JPanel();
     private JTextArea textArea;
 
+    private static HistoryCommand historyCommand = HistoryCommand.getInstance();
 
     private String copyBuffer = "";
 
@@ -84,7 +87,8 @@ public class Editor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Command copy = CopyCommand.getInstance(editor);
-                copy.execute();}
+                copy.execute();
+            }
         });
 
 
@@ -94,6 +98,7 @@ public class Editor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Command paste = PasteCommand.getInstance(editor);
+                historyCommand.push(paste);
                 paste.execute();
             }
         });
@@ -103,8 +108,21 @@ public class Editor {
         btnCut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Command paste = CutCommand.getInstance(editor);
-                paste.execute();
+                Command cut = CutCommand.getInstance(editor);
+                cut.execute();
+            }
+        });
+
+        JButton btnReplay = new JButton("Replay");
+        btnReplay.setBounds(50, 210, 180, 30);
+        btnReplay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Command last = historyCommand.replay();
+                if(!textArea.getText().isEmpty()){
+                    last.execute();
+                }
+                
             }
         });
         // Ajour des bouton à l'interface
@@ -113,7 +131,27 @@ public class Editor {
         panel_2.add(btnCopy);
         panel_2.add(btnPaste);
         panel_2.add(btnCut);
+        panel_2.add(btnReplay);
 
+        textArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
+                CharacterReleaseCommand charKey = new CharacterReleaseCommand(editor, e.getKeyChar(), e.getKeyCode());
+                historyCommand.push(charKey);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+
+        });
 
         GridLayout griddy = new GridLayout(2, 0);
         window.setLayout(griddy);

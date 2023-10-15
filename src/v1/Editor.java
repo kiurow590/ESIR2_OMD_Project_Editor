@@ -102,8 +102,8 @@ public class Editor {
         btnCut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Command paste = CutCommand.getInstance(editor);
-                paste.execute();
+                Command cut = CutCommand.getInstance(editor);
+                cut.execute();
             }
         });
         // Ajour des bouton à l'interface
