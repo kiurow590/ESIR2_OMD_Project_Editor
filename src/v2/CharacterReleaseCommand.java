@@ -17,7 +17,7 @@ public class CharacterReleaseCommand implements Command{
 
     @Override
     public void execute() {
-        //System.out.println("COUCOU C MOI");
+        System.out.println("COUCOU C MOI");
         JTextArea temp = editor.getTextArea();
         //ajout du caractère à la fin du texteArea
         if (codeChar == 8){

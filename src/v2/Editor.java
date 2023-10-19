@@ -98,8 +98,9 @@ public class Editor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Command paste = PasteCommand.getInstance(editor);
-                historyCommand.push(new Pair<Command, String>(paste, textArea.getText()));
                 paste.execute();
+                historyCommand.push(new Pair<Command, String>(paste, textArea.getText()));
+
             }
         });
 
@@ -110,6 +111,8 @@ public class Editor {
             public void actionPerformed(ActionEvent e) {
                 Command cut = CutCommand.getInstance(editor);
                 cut.execute();
+                historyCommand.push(new Pair<Command, String>(cut, textArea.getText()));
+
             }
         });
 
@@ -121,6 +124,8 @@ public class Editor {
                 Pair<Command, String> last = historyCommand.replay();
                 if (!textArea.getText().isEmpty()) {
                     last.getKey().execute();
+                    historyCommand.push(new Pair<Command, String>(last.getKey(), textArea.getText()));
+
                 }
 
             }
@@ -150,11 +155,14 @@ public class Editor {
             public void actionPerformed(ActionEvent e) {
                 // objectif : refaire la derniere commande annulée
                 try {
+                    if (historyCommand.getCurrentId() == historyCommand.getHistoricStack().size() - 1) {
+                        throw new Exception("Pas de commande à refaire");
+                    }
                     Pair<Command, String> redo = historyCommand.redo();
                     assert redo != null;
                     textArea.setText(redo.getValue());
                 } catch (Exception ex) {
-                    System.out.println("Pas de commande à refaire");
+                    System.out.println(ex);
                 }
 
             }
@@ -181,7 +189,10 @@ public class Editor {
             public void keyPressed(KeyEvent e) {
                 //System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
                 CharacterReleaseCommand charKey = new CharacterReleaseCommand(editor, e.getKeyChar(), e.getKeyCode());
-                historyCommand.push(new Pair<Command, String>(charKey, textArea.getText()));
+                historyCommand.push(new Pair<Command, String>(charKey, textArea.getText()+e.getKeyChar()));
+                System.out.println("command : " +historyCommand.getHistoricStack().elementAt(historyCommand.getCurrentId()).getKey() +"text : " + historyCommand.getHistoricStack().elementAt(historyCommand.getCurrentId()).getValue());
+
+
             }
 
             @Override

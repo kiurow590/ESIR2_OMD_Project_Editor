@@ -7,13 +7,14 @@ public final class HistoryCommand {
 
     private static HistoryCommand instance = null;
 
-    private Stack<Pair<Command, String>> historicStack = new Stack<>();
+    private static Stack<Pair<Command, String>> historicStack = new Stack<>();
 
     private int currentId = 0;
 
     public static HistoryCommand getInstance() {
         if (instance == null) {
             instance = new HistoryCommand();
+            historicStack.push(new Pair<>(new CharacterReleaseCommand(null, ' ', ' '), ""));
         }
         return instance;
     }
@@ -22,11 +23,13 @@ public final class HistoryCommand {
     }
 
     public Pair<Command, String> undo() {
-        if (currentId >= 0) {
+        if (currentId > 0) {
             currentId--;
+            System.out.println("PreUndo " + historicStack.elementAt(currentId));
             System.out.println("Historique : " + historicStack.toString() + "currentId : " + currentId + " historicStack.size() : " + historicStack.size());
+            System.out.println("current ID Undo" + historicStack.elementAt(currentId));
 
-            return historicStack.elementAt(currentId+1);
+            return historicStack.elementAt(currentId);
         } else {
             System.out.println("NULLLLLLPTN Historique : " + historicStack.toString() + "currentId : " + currentId + " historicStack.size() : " + historicStack.size());
 
@@ -35,11 +38,13 @@ public final class HistoryCommand {
     }
 
     public Pair<Command, String> redo() {
-        if (currentId < historicStack.size()) {
+        if (currentId <= historicStack.size()-1) {
+            //System.out.println("PreUndo " + historicStack.elementAt(currentId));
             currentId++;
             System.out.println("Historique : " + historicStack.toString() + "currentId : " + currentId + " historicStack.size() : " + historicStack.size());
+            System.out.println("current ID Redo" + historicStack.elementAt(currentId));
 
-            return historicStack.elementAt(currentId-1);
+            return historicStack.elementAt(currentId);
         } else {
             System.out.println("NULLLLLLPTN Historique : " + historicStack.toString() + "currentId : " + currentId + " historicStack.size() : " + historicStack.size());
 
@@ -57,16 +62,31 @@ public final class HistoryCommand {
 
 
     public void push(Pair<Command, String> command) {
-        if (currentId == historicStack.size()) {
+        if (historicStack.empty()){
             historicStack.push(command);
+            //currentId++;
+
+            System.out.println("taille if 1 " + historicStack.size());
+            System.out.println("Before Push ID " + historicStack.elementAt(currentId) + "currentId : " + currentId);
+        }
+        else if (currentId == historicStack.size()-1) {
+            historicStack.push(command);
+            currentId++;
+            System.out.println("taille if 2 " + historicStack.size());
+            System.out.println("Before Push ID " + historicStack.elementAt(currentId) + "currentId : " + currentId);
+
         } else {
             // on efface les commandes qui ont été annulées
-            while (currentId < historicStack.size()) {
+            while (currentId < historicStack.size()-1) {
                 historicStack.pop();
             }
             historicStack.push(command);
+            currentId++;
+            System.out.println("taille if 3 " + historicStack.size());
+            System.out.println("Before Push ID " + historicStack.elementAt(currentId));
         }
-        currentId++;
+
+        //System.out.println("After Push ID " + historicStack.elementAt(currentId));
         System.out.println("Historique : " + historicStack.toString() + "currentId : " + currentId + " historicStack.size() : " + historicStack.size());
     }
 
@@ -90,5 +110,9 @@ public final class HistoryCommand {
 
     public String toString() {
         return "History : " + historicStack.toString();
+    }
+
+    public Stack<Pair<Command, String>> getHistoricStack(){
+        return historicStack;
     }
 }
