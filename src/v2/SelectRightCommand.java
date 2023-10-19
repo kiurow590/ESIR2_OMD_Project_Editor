@@ -2,12 +2,16 @@ package v2;
 
 import javax.swing.*;
 
+/**
+ * @author Aubry TONNERRE && Thibault GUERINEL
+ */
+
 public final class SelectRightCommand implements Command {
     private Editor editor;
     private static SelectRightCommand instance = null;
 
     /**
-     * constructor
+     * constructor of SelectRightCommand
      * @param editor
      */
     private SelectRightCommand(Editor editor) {
@@ -26,6 +30,11 @@ public final class SelectRightCommand implements Command {
         }
         return instance;
     }
+
+    /**
+     * execute the command
+     * augmente la selection de 1 caractere vers la droite
+     */
     @Override
     public void execute() {
         JTextArea temp = editor.getTextArea();

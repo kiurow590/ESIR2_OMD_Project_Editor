@@ -1,12 +1,16 @@
 package v2;
 
+/**
+ * @author Aubry TONNERRE && Thibault GUERINEL
+ */
+
 public final class CopyCommand implements Command {
     private Editor editor;
 
     private static CopyCommand instance = null;
 
     /**
-     * Constructor
+     * Constructor of CopyCommand
      * @param editor
      */
     private CopyCommand(Editor editor) {
@@ -25,6 +29,10 @@ public final class CopyCommand implements Command {
         return instance;
     }
 
+    /**
+     * Execute the command
+     * Copy the selected text in the copy buffer
+     */
     @Override
     public void execute() {
         editor.setCopyBuffer(editor.getTextArea().getSelectedText());

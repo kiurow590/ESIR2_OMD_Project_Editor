@@ -2,12 +2,16 @@ package v2;
 
 import javax.swing.*;
 
+/**
+ * @author Aubry TONNERRE && Thibault GUERINEL
+ */
+
 public final class SelectLeftCommand implements Command {
     private Editor editor;
     private static SelectLeftCommand instance = null;
 
     /**
-     * constructor
+     * constructor of SelectLeftCommand
      * @param editor
      */
     private SelectLeftCommand(Editor editor) {
@@ -27,6 +31,10 @@ public final class SelectLeftCommand implements Command {
         return instance;
     }
 
+    /**
+     * execute the command
+     * augmente la selection de 1 caractere vers la gauche
+     */
     @Override
     public void execute() {
         JTextArea temp = editor.getTextArea();
