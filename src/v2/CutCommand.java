@@ -2,6 +2,9 @@ package v2;
 
 import javax.swing.*;
 
+/**
+ * @author Aubry TONNERRE && Thibault GUERINEL
+ */
 
 public final class CutCommand implements Command {
 
@@ -10,7 +13,7 @@ public final class CutCommand implements Command {
     private static CutCommand instance = null;
 
     /**
-     * constructor
+     * constructor of CutCommand
      * @param editor
      */
     private CutCommand(Editor editor){
@@ -29,6 +32,10 @@ public final class CutCommand implements Command {
         return instance;
     }
 
+    /**
+     * execute the command
+     * cut the selected text and put it in the copy buffer
+     */
     @Override
     public void execute() {
         JTextArea temp = editor.getTextArea();

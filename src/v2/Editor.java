@@ -98,8 +98,9 @@ public class Editor {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Command paste = PasteCommand.getInstance(editor);
-                historyCommand.push(new Pair<Command, String>(paste, textArea.getText()));
                 paste.execute();
+                historyCommand.push(new Pair<Command, String>(paste, textArea.getText()));
+
             }
         });
 
@@ -110,6 +111,7 @@ public class Editor {
             public void actionPerformed(ActionEvent e) {
                 Command cut = CutCommand.getInstance(editor);
                 cut.execute();
+                historyCommand.push(new Pair<Command, String>(cut, textArea.getText()));
             }
         });
 
@@ -121,6 +123,8 @@ public class Editor {
                 Pair<Command, String> last = historyCommand.replay();
                 if (!textArea.getText().isEmpty()) {
                     last.getKey().execute();
+                    historyCommand.push(new Pair<Command, String>(last.getKey(), textArea.getText()));
+
                 }
 
             }
@@ -150,11 +154,14 @@ public class Editor {
             public void actionPerformed(ActionEvent e) {
                 // objectif : refaire la derniere commande annulée
                 try {
+                    if (historyCommand.getCurrentId() == historyCommand.getHistoricStack().size() - 1) {
+                        throw new Exception("Pas de commande à refaire");
+                    }
                     Pair<Command, String> redo = historyCommand.redo();
                     assert redo != null;
                     textArea.setText(redo.getValue());
                 } catch (Exception ex) {
-                    System.out.println("Pas de commande à refaire");
+                    System.out.println(ex);
                 }
 
             }
@@ -174,21 +181,16 @@ public class Editor {
         textArea.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
-                //System.out.println("Key pressed code=" + e.getKeyCode() + ", char=" + e.getKeyChar());
                 CharacterReleaseCommand charKey = new CharacterReleaseCommand(editor, e.getKeyChar(), e.getKeyCode());
-                historyCommand.push(new Pair<Command, String>(charKey, textArea.getText()));
+                historyCommand.push(new Pair<Command, String>(charKey, textArea.getText()+e.getKeyChar()));
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
-
             }
-
         });
 
         GridLayout griddy = new GridLayout(2, 0);
@@ -238,6 +240,8 @@ public class Editor {
     }
 
     /**
+     * mets a jour le texte de l'editeur
+     *
      * @param text le nouveau texte
      */
     public void setTextArea(JTextArea text) {
