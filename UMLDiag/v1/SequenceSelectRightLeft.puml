@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+user -> système: selectionnerTexte
+user -> système: clickButton()
+système -> système: detecterZoneSelect
+système -> système: augmenteSelection
+système -> user: surlignageTexte
+@enduml

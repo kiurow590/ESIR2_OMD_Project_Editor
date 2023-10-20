@@ -7,5 +7,4 @@ user -> système: ClickCutButton
 système -> système: editor.setCopyBuffer(temp.getSelectedText());
 système -> système: textArea.deleteSelection();
 système -> user: supprimerTexte
-
 @enduml
