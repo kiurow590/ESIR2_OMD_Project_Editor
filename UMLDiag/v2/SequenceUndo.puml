@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-user -> system: cliqueUndo()
-system -> system: executeLaCommandePrecedente()
-system -> user: afficheLeTexte()
+user -> Editor: cliqueUndo()
+Editor -> Editor: executeLaCommandePrecedente()
+Editor -> user: afficheLeTexte()
 @enduml
