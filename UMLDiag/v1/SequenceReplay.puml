@@ -1,0 +1,6 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+user -> système : cliqueReplay()
+système -> système : executeLaDerniereCommande()
+système -> user : afficheLeTexte()
+@enduml

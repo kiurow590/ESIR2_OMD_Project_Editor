@@ -1,0 +1,6 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+user -> system: cliqueRedo()
+system -> system: executeLaCommandeSuivante()
+system -> user: afficheLeTexte()
+@enduml
