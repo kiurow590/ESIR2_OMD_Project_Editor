@@ -1,9 +1,9 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-user -> système: selectionnerTexte
-système -> système: detecterZoneSelect
-système -> user: surlignageTexte
-user -> système: ClickCutButton
-système -> système: CutCommand.execute()
-système -> user: supprimerTexte
+user -> Editeur: selectionnerTexte
+Editeur -> Editeur: detecterZoneSelect
+Editeur -> user: surlignageTexte
+user -> Editeur: ClickCutButton
+Editeur -> Editeur: CutCommand.execute()
+Editeur -> user: supprimerTexte
 @enduml
