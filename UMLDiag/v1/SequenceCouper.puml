@@ -4,7 +4,6 @@ user -> système: selectionnerTexte
 système -> système: detecterZoneSelect
 système -> user: surlignageTexte
 user -> système: ClickCutButton
-système -> système: editor.setCopyBuffer(temp.getSelectedText());
-système -> système: textArea.deleteSelection();
+système -> système: CutCommand.execute()
 système -> user: supprimerTexte
 @enduml

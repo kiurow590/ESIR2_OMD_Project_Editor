@@ -1,45 +1,63 @@
 @startuml
-'https://plantuml.com/class-diagram
 
-class "Editor" as editor {
-    + lstCommand : List<Command>
-    + text: String
-    + cursor: Int
-    + afficher()
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+interface Command << interface >> {
+  + execute(): void
+}
+class CopyCommand {
+  + execute(): void
+  + getInstance(Editor): CopyCommand
+}
+class CutCommand {
+  + execute(): void
+  + getInstance(Editor): CutCommand
+}
+class Editor {
+  - textArea: JTextArea
+  - copyBuffer: String
+   selectedTextText: String
+   copyBuffer: String
+   textArea: JTextArea
+}
+class JButton {
+  + removeNotify(): void
+  + updateUI(): void
+  - writeObject(ObjectOutputStream): void
+  # paramString(): String
+   UIClassID: String
+   accessibleContext: AccessibleContext
+   defaultButton: boolean
+   defaultCapable: boolean
+}
+class MainEditor {
+  + main(String[]): void
+}
+class PasteCommand {
+  + getInstance(Editor): PasteCommand
+  + execute(): void
+}
+class SelectLeftCommand {
+  + execute(): void
+  + getInstance(Editor): SelectLeftCommand
+}
+class SelectRightCommand {
+  + getInstance(Editor): SelectRightCommand
+  + execute(): void
 }
 
-
-
-class "CopyCommand" as copycommand {
-    + void execute()
-
-}
-
-class "PasteCommand" as pastecommand {
-    + void execute()
-
-}
-
-class "CutCommand" as cutcommand {
-    + void execute()
-
-}
-
-abstract "Command" as command {
-    + void {abstract}execute()
-}
-
-
-
-
-
-copycommand -up-|> command
-pastecommand -up-|> command
-cutcommand -up-|> command
-
-
-copycommand --> editor
-cutcommand --> editor
-pastecommand --> editor
-
+CopyCommand         -[#008200,dashed]-^  Command
+CopyCommand        "1" *-[#595959,plain]->  Editor
+CutCommand          -[#008200,dashed]-^  Command
+CutCommand         "1" *-[#595959,plain]->  Editor
+Editor              -[#595959,dashed]->  JButton            : "«create»"
+MainEditor          -[#595959,dashed]->  Editor             : "«create»"
+PasteCommand        -[#008200,dashed]-^  Command
+PasteCommand       "1" *-[#595959,plain]->  Editor
+SelectLeftCommand   -[#008200,dashed]-^  Command
+SelectLeftCommand  "1" *-[#595959,plain]->  Editor
+SelectRightCommand  -[#008200,dashed]-^  Command
+SelectRightCommand "1" *-[#595959,plain]->  Editor
 @enduml

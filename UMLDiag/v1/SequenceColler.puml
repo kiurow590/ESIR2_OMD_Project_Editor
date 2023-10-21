@@ -1,10 +1,8 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/sequence-diagram'
 user -> système: placementCurseur
 système -> user: placement
-user -> système: clickCopyButton
-système -> système: getCopyBuffer()
-système -> user: Ajout dans zone de texte
-
-
+user -> système: clickPasteButton
+système -> système: CommandPaste.execute()
+système -> user: Ajout et remplacement dans zone de texte
 @enduml

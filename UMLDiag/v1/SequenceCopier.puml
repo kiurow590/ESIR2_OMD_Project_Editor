@@ -4,5 +4,5 @@ user -> système: selectionnerTexte
 système -> système: detecterZoneSelect
 système -> user: surlignageTexte
 user -> système: clickCopyButton
-système -> système: editor.setCopyBuffer()
+système -> système: CopyCommand.execute()
 @enduml
