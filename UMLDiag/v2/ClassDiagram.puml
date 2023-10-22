@@ -1,0 +1,77 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class CharacterReleaseCommand {
+  + execute(): void
+  + toString(): String
+}
+interface Command << interface >> {
+  + execute(): void
+}
+class CopyCommand {
+  + execute(): void
+  + getInstance(Editor): CopyCommand
+}
+class CutCommand {
+  + execute(): void
+  + getInstance(Editor): CutCommand
+}
+class Editor {
+   selectedTextText: String
+   copyBuffer: String
+   textArea: JTextArea
+}
+class HistoryCommand {
+  + toString(): String
+  + pop(): Pair<Command, String>
+  + replay(): Pair<Command, String>
+  + push(Pair<Command, String>): void
+  + undo(): Pair<Command, String>?
+  + redo(): Pair<Command, String>?
+   currentId: int
+   historicStack: Stack<Pair<Command, String>>
+   empty: boolean
+   instance: HistoryCommand
+}
+class MainEditor {
+  + main(String[]): void
+}
+class Pair<K, V> {
+   value: V
+   key: K
+}
+class PasteCommand {
+  + getInstance(Editor): PasteCommand
+  + execute(): void
+}
+class SelectLeftCommand {
+  + getInstance(Editor): SelectLeftCommand
+  + execute(): void
+}
+class SelectRightCommand {
+  + execute(): void
+  + getInstance(Editor): SelectRightCommand
+}
+
+CharacterReleaseCommand  -[#008200,dashed]-^  Command   
+CharacterReleaseCommand "1" *-[#595959,plain]-> Editor  
+CopyCommand              -[#008200,dashed]-^  Command   
+CopyCommand             "1" *-[#595959,plain]->  Editor  
+CutCommand               -[#008200,dashed]-^  Command   
+CutCommand              "1" *-[#595959,plain]->  Editor  
+Editor                   -[#595959,dashed]->  CharacterReleaseCommand : "«create»"
+Editor                  "1" *-[#595959,plain]-> "historyCommand\n1" HistoryCommand  
+Editor                   -[#595959,dashed]->  Pair                    : "«create»"
+HistoryCommand           -[#595959,dashed]->  CharacterReleaseCommand : "«create»"
+HistoryCommand           -[#595959,dashed]->  Pair                    : "«create»"
+MainEditor               -[#595959,dashed]->  Editor                  : "«create»"
+PasteCommand             -[#008200,dashed]-^  Command   
+PasteCommand            "1" *-[#595959,plain]-> Editor  
+SelectLeftCommand        -[#008200,dashed]-^  Command   
+SelectLeftCommand       "1" *-[#595959,plain]-> Editor  
+SelectRightCommand       -[#008200,dashed]-^  Command   
+SelectRightCommand      "1" *-[#595959,plain]-> Editor  
+@enduml
