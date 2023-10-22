@@ -1,10 +1,10 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-user -> système: selectionnerTexte
-système -> système: detecterZoneSelect
-système -> user: surlignageTexte
-user -> système: suppr
-système -> système: supprimerBuffer
-système -> user: supprimerTexte
+user -> Editor: selectionnerTexte
+Editor -> Editor: detecterZoneSelect
+Editor -> user: surlignageTexte
+user -> Editor: suppr
+Editor -> Editor: supprimerBuffer
+Editor -> user: supprimerTexte
 
 @enduml

@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram'
-user -> Editeur: placementCurseur
-Editeur -> user: AffichageCurseur
-user -> Editeur: clickPasteButton
-Editeur -> Editeur: CommandPaste.execute()
-Editeur -> user: Ajout et remplacement dans zone de texte
+user -> Editor: placementCurseur
+Editor -> user: AffichageCurseur
+user -> Editor: clickPasteButton
+Editor -> Editor: CommandPaste.execute()
+Editor -> user: Ajout et remplacement dans zone de texte
 @enduml

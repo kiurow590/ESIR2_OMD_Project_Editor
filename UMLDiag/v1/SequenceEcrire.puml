@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-user -> système: écrire
-système -> système: mise en buffer
-système -> user: afficherTexte
+user -> Editor: écrire
+Editor -> Editor: mise en buffer
+Editor -> user: afficherTexte
 @enduml

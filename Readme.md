@@ -91,7 +91,7 @@ Nous en avons donc déduit que ce pattern correspondait à nos besoins, car il p
 A l'aide du pattern que nous avons choisi, nous avons pu réaliser le diagramme de classe suivant :
 
 <figure>
-<img src="UMLDiag/v1/ClassDiagram.svg" alt="Trulli" style="width:100%">
+<img src="UMLDiag/v1/ClassDiagram.svg" alt="Trulli" style="width:150%">
 <figcaption align = "center"><b>Fig.4 - Diagram Class V1.</b></figcaption>
 </figure>
 
@@ -218,7 +218,7 @@ Comme notre implémentation est modulaire, nous avons pu les rajouter sans diffi
 ### Diagramme UML
 
 <figure>
-<img src="UMLDiag/v2/DiagClassV2.svg" alt="Trulli" style="width:50%">
+<img src="UMLDiag/v2/DiagClassV2.svg" alt="Trulli" style="width:150%">
 <figcaption align = "center"><b>Fig.10 - Diagram Class V2.</b></figcaption>
 </figure>
 
