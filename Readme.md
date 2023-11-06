@@ -36,6 +36,9 @@ Le projet est organisé en 2 packages principaux :
 |----|---------------------------------------------------------------------------------------------------------------------|--------------------|
 | V2 | Contient la seconde version de l'éditeur qui a pour objectif de gérer en plus les commandes de undo/redo et replay. | :white_check_mark: |
 
+### Utilisation du projet 
+Importer le projet dans votre IDE (à adapter entre eclipse/Vscode/Intellij) et exécuter pour chaque version le fichier ***MainEditor.java*** pour lancer la v1 ou la v2.
+
 ## Pattern de conception utilisé - Commande
 
 Le pattern que nous allons utiliser pour faire ce projet est le **pattern de conception Commande**.
